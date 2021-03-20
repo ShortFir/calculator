@@ -7,12 +7,43 @@
 
     <meta charset="UTF-8">
 
-    <!-- <link rel="icon" type="ico" href="image/icon.ico"> -->
+    <link rel="icon" type="ico" href="image/calculator_v2.ico">
 
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+    <div id="calculatorBox">
+        <span class="display" id="outputDisplay"></span>
+        <span class="display" id="inputDisplay"></span>
+        <div id="buttonGrid">
+            <div id="numberButtonGrid">
+                <button class="numberButton" id="sevenButton">7</button>
+                <button class="numberButton" id="eightButton">8</button>
+                <button class="numberButton" id="nineButton">9</button>
+                <button class="numberButton" id="fourButton">4</button>
+                <button class="numberButton" id="fiveButton">5</button>
+                <button class="numberButton" id="sixButton">6</button>
+                <button class="numberButton" id="oneButton">1</button>
+                <button class="numberButton" id="twoButton">2</button>
+                <button class="numberButton" id="threeButton">3</button>
+                <button class="numberButton" id="zeroButton">0</button>
+                <button class="numberButton" id="decimelButton">.</button>
+            </div>
+            <div id="operatorButtonGrid">
+                <button class="operatorButton" id="divideButton">/</button>
+                <button class="operatorButton" id="multiplyButton">*</button>
+                <button class="operatorButton" id="subtractButton">-</button>
+                <button class="operatorButton" id="addButton">+</button>
+            </div>
+            <div id="functionButtonGrid">
+                <button class="functionButton" id="clearButton">Clear</button>
+                <button class="functionButton" id="deleteButton">Backspace</button>
+                <button class="functionButton" id="equalButton">=</button>
+            </div>
+        </div>
+    </div>
+
     <script src="js/script.js"></script>
 </body>
 
