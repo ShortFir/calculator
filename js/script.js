@@ -1,7 +1,8 @@
 const inputDisplay = document.getElementById("inputDisplay");
 const outputDisplay = document.getElementById("outputDisplay");
 
-let displayValue = "", firstValue = 0, secondValue = 0, operator = "";
+let displayString = "", currentValue = "", operator = "";
+let runningTotal = 0;
 
 function add(a, b)
 {
@@ -33,117 +34,125 @@ function operate(num1, num2, buttonId)
             return divide(num1, num2);
     }
 }
+function clearInputDisplay()
+{
+    displayString = "";
+    currentValue = "";
+    operator = "";
+    runningTotal = 0;
+    inputDisplay.textContent = displayString;
+}
 function buttonClick(buttonId)
 {
-    // console.log(buttonId);
     switch(buttonId)
     {
         case "zeroButton":
-            inputDisplay.textContent += "0"
-            displayValue += "0";
-            console.log(buttonId + ": " + displayValue);
+            currentValue += "0";
+            displayString += "0";
+            inputDisplay.textContent = displayString;
             break;
         case "oneButton":
-            inputDisplay.textContent += "1"
-            displayValue += "1";
-            console.log(buttonId + ": " + displayValue);
+            currentValue += "1";
+            displayString += "1";
+            inputDisplay.textContent = displayString;
             break;
         case "twoButton":
-            inputDisplay.textContent += "2";
-            displayValue += "2";
-            console.log(buttonId + ": " + displayValue);
+            currentValue += "2";
+            displayString += "2";
+            inputDisplay.textContent = displayString;
             break;
         case "threeButton":
-            inputDisplay.textContent += "3";
-            displayValue += "3";
-            console.log(buttonId + ": " + displayValue);
+            currentValue += "3";
+            displayString += "3";
+            inputDisplay.textContent = displayString;
             break;
         case "fourButton":
-            inputDisplay.textContent += "4";
-            displayValue += "4";
-            console.log(buttonId + ": " + displayValue);
+            currentValue += "4";
+            displayString += "4";
+            inputDisplay.textContent = displayString;
             break;
         case "fiveButton":
-            inputDisplay.textContent += "5";
-            displayValue += "5";
-            console.log(buttonId + ": " + displayValue);
+            currentValue += "5";
+            displayString += "5";
+            inputDisplay.textContent = displayString;
             break;
         case "sixButton":
-            inputDisplay.textContent += "6";
-            displayValue += "6";
-            console.log(buttonId + ": " + displayValue);
+            currentValue += "6";
+            displayString += "6";
+            inputDisplay.textContent = displayString;
             break;
         case "sevenButton":
-            inputDisplay.textContent += "7";
-            displayValue += "7";
-            console.log(buttonId + ": " + displayValue);
+            currentValue += "7";
+            displayString += "7";
+            inputDisplay.textContent = displayString;
             break;
         case "eightButton":
-            inputDisplay.textContent += "8";
-            displayValue += "8";
-            console.log(buttonId + ": " + displayValue);
+            currentValue += "8";
+            displayString += "8";
+            inputDisplay.textContent = displayString;
             break;
         case "nineButton":
-            inputDisplay.textContent += "9";
-            displayValue += "9";
-            console.log(buttonId + ": " + displayValue);
+            currentValue += "9";
+            displayString += "9";
+            inputDisplay.textContent = displayString;
             break;
         case "divideButton":
-            console.log(buttonId + ": " + displayValue);
-            inputDisplay.textContent += " / ";
-            if(firstValue === 0)
-            {
-                firstValue = parseInt(displayValue);
-                displayValue = "";
-            }
-            operator = buttonId;
+            (runningTotal === 0) ?
+            runningTotal = parseInt(currentValue) :
+            runningTotal = operate(runningTotal, parseInt(currentValue), operator);
+            operator = buttonId; // placed after operation to avoid errors
+            currentValue = "";
+            displayString += `\u00F7`;
+            inputDisplay.textContent = displayString;
             break;
         case "multiplyButton":
-            console.log(buttonId + ": " + displayValue);
-            inputDisplay.textContent += " * ";
-            if(firstValue === 0)
-            {
-                firstValue = parseInt(displayValue);
-                displayValue = "";
-            }
-            operator = buttonId;
+            (runningTotal === 0) ?
+            runningTotal = parseInt(currentValue) :
+            runningTotal = operate(runningTotal, parseInt(currentValue), operator);
+            operator = buttonId; // placed after operation to avoid errors
+            currentValue = "";
+            displayString += "x";
+            inputDisplay.textContent = displayString;
             break;
         case "subtractButton":
-            console.log(buttonId + ": " + displayValue);
-            inputDisplay.textContent += " - ";
-            if(firstValue === 0)
-            {
-                firstValue = parseInt(displayValue);
-                displayValue = "";
-            }
-            operator = buttonId;
+            (runningTotal === 0) ?
+            runningTotal = parseInt(currentValue) :
+            runningTotal = operate(runningTotal, parseInt(currentValue), operator);
+            operator = buttonId; // placed after operation to avoid errors
+            currentValue = "";
+            displayString += "-";
+            inputDisplay.textContent = displayString;
             break;
         case "addButton":
-            console.log(buttonId + ": " + displayValue);
-            inputDisplay.textContent += " + ";
-            if(firstValue === 0)
-            {
-                firstValue = parseInt(displayValue);
-                displayValue = "";
-            }
-            operator = buttonId;
+            (runningTotal === 0) ?
+            runningTotal = parseInt(currentValue) :
+            runningTotal = operate(runningTotal, parseInt(currentValue), operator);
+            operator = buttonId; // placed after operation to avoid errors
+            currentValue = "";
+            displayString += "+";
+            inputDisplay.textContent = displayString;
             break;
         case "clearButton":
-            console.log(buttonId + ": " + displayValue);
+            clearInputDisplay();
+            break;
+        case "deleteButton":
+            // if(operator !== "")
+            // {
+            //     operator = "";
+            //     displayString = displayString.split("").slice(0, -1).join("");
+            // }else
+            // {
+            //     currentValue = currentValue.split("").slice(0, -1).join("");
+            //     displayString = displayString.split("").slice(0, -1).join("");
+            // }
+            // inputDisplay.textContent = displayString;
             break;
         case "equalButton":
-            console.log(buttonId + ": " + firstValue);
-            console.log(buttonId + ": " + operator);
-            if(firstValue !== 0)
+            if(runningTotal !== 0 && currentValue !== "")
             {
-                secondValue = parseInt(displayValue);
-                console.log(buttonId + ": " + secondValue);
-                outputDisplay.textContent = inputDisplay.textContent + " = " + operate(firstValue, secondValue, operator);
-                firstValue = 0;
-                secondValue = 0;
-                displayValue = "";
-                operator = "";
-                inputDisplay.textContent = "";
+                runningTotal = operate(runningTotal, parseInt(currentValue), operator);
+                outputDisplay.textContent += displayString + " = " + runningTotal + `\n`;
+                clearInputDisplay();
             }
             break;    
     }
