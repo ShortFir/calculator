@@ -42,6 +42,10 @@ function clearInputDisplay()
     runningTotal = 0;
     inputDisplay.textContent = displayString;
 }
+function updateDisplay()
+{
+    inputDisplay.textContent = displayString;
+}
 function buttonClick(buttonId)
 {
     switch(buttonId)
@@ -49,88 +53,102 @@ function buttonClick(buttonId)
         case "zeroButton":
             currentValue += "0";
             displayString += "0";
-            inputDisplay.textContent = displayString;
+            // inputDisplay.textContent = displayString;
+            updateDisplay()
             break;
         case "oneButton":
             currentValue += "1";
             displayString += "1";
-            inputDisplay.textContent = displayString;
+            // inputDisplay.textContent = displayString;
+            updateDisplay()
             break;
         case "twoButton":
             currentValue += "2";
             displayString += "2";
-            inputDisplay.textContent = displayString;
+            // inputDisplay.textContent = displayString;
+            updateDisplay()
             break;
         case "threeButton":
             currentValue += "3";
             displayString += "3";
-            inputDisplay.textContent = displayString;
+            // inputDisplay.textContent = displayString;
+            updateDisplay()
             break;
         case "fourButton":
             currentValue += "4";
             displayString += "4";
-            inputDisplay.textContent = displayString;
+            // inputDisplay.textContent = displayString;
+            updateDisplay()
             break;
         case "fiveButton":
             currentValue += "5";
             displayString += "5";
-            inputDisplay.textContent = displayString;
+            // inputDisplay.textContent = displayString;
+            updateDisplay()
             break;
         case "sixButton":
             currentValue += "6";
             displayString += "6";
-            inputDisplay.textContent = displayString;
+            // inputDisplay.textContent = displayString;
+            updateDisplay()
             break;
         case "sevenButton":
             currentValue += "7";
             displayString += "7";
-            inputDisplay.textContent = displayString;
+            // inputDisplay.textContent = displayString;
+            updateDisplay()
             break;
         case "eightButton":
             currentValue += "8";
             displayString += "8";
-            inputDisplay.textContent = displayString;
+            // inputDisplay.textContent = displayString;
+            updateDisplay()
             break;
         case "nineButton":
             currentValue += "9";
             displayString += "9";
-            inputDisplay.textContent = displayString;
+            // inputDisplay.textContent = displayString;
+            updateDisplay()
             break;
         case "divideButton":
             (runningTotal === 0) ?
-            runningTotal = parseInt(currentValue) :
-            runningTotal = operate(runningTotal, parseInt(currentValue), operator);
-            operator = buttonId; // placed after operation to avoid errors
+                runningTotal = parseInt(currentValue) :
+                runningTotal = operate(runningTotal, parseInt(currentValue), operator);
+            operator = buttonId; // placed after operation to avoid logic errors
             currentValue = "";
             displayString += `\u00F7`;
-            inputDisplay.textContent = displayString;
+            // inputDisplay.textContent = displayString;
+            updateDisplay()
             break;
         case "multiplyButton":
             (runningTotal === 0) ?
-            runningTotal = parseInt(currentValue) :
-            runningTotal = operate(runningTotal, parseInt(currentValue), operator);
-            operator = buttonId; // placed after operation to avoid errors
+                runningTotal = parseInt(currentValue) :
+                runningTotal = operate(runningTotal, parseInt(currentValue), operator);
+            operator = buttonId; // placed after operation to avoid logic errors
             currentValue = "";
             displayString += "x";
-            inputDisplay.textContent = displayString;
+            // inputDisplay.textContent = displayString;
+            updateDisplay()
             break;
         case "subtractButton":
             (runningTotal === 0) ?
-            runningTotal = parseInt(currentValue) :
-            runningTotal = operate(runningTotal, parseInt(currentValue), operator);
-            operator = buttonId; // placed after operation to avoid errors
+                runningTotal = parseInt(currentValue) :
+                runningTotal = operate(runningTotal, parseInt(currentValue), operator);
+            operator = buttonId; // placed after operation to avoid logic errors
             currentValue = "";
             displayString += "-";
-            inputDisplay.textContent = displayString;
+            // inputDisplay.textContent = displayString;
+            updateDisplay()
             break;
         case "addButton":
             (runningTotal === 0) ?
-            runningTotal = parseInt(currentValue) :
-            runningTotal = operate(runningTotal, parseInt(currentValue), operator);
-            operator = buttonId; // placed after operation to avoid errors
+                runningTotal = parseInt(currentValue) :
+                runningTotal = operate(runningTotal, parseInt(currentValue), operator);
+            operator = buttonId; // placed after operation to avoid logic errors
             currentValue = "";
             displayString += "+";
-            inputDisplay.textContent = displayString;
+            // inputDisplay.textContent = displayString;
+            updateDisplay()
             break;
         case "clearButton":
             clearInputDisplay();
@@ -152,6 +170,7 @@ function buttonClick(buttonId)
             {
                 runningTotal = operate(runningTotal, parseInt(currentValue), operator);
                 outputDisplay.textContent += displayString + " = " + runningTotal + `\n`;
+                outputDisplay.scrollTop = outputDisplay.scrollHeight;
                 clearInputDisplay();
             }
             break;    

@@ -20,7 +20,7 @@ body
     grid-template-columns: 1fr;
     grid-template-rows: 2fr 1fr 3fr;
     border-style: solid;
-    border-color: hsl(0, 0%, 60%);
+    border-color: hsl(0, 0%, 40%);
     border-width: 10px;
     border-radius: 10px;
 }
@@ -38,7 +38,6 @@ body
     font-size: 150%;
     white-space: pre;
     overflow-y: scroll;
-    /* overflow-x: scroll; */
 }
 #inputDisplay
 {
@@ -50,13 +49,16 @@ body
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: 1fr;
-    background-color: hsl(0, 0%, 60%);
+    background-color: hsl(0, 0%, 40%);
 }
 .buttonAppearance
 {
     background-color: hsl(0, 0%, 90%);
-    font-size: 125%;
     border-radius: 5px;
+    font-size: 125%;
+    text-decoration: none;
+    cursor: pointer;
+    border: outset;
 }
 .buttonAppearance:hover
 {
