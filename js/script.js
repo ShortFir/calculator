@@ -130,29 +130,44 @@ function buttonClick(buttonId)
             updateDisplay();
             break;
         case "decimelButton":
-            currentValue += ".";
-            displayString += ".";
-            updateDisplay();
+            if(!currentValue.includes("."))
+            {
+                currentValue += ".";
+                displayString += ".";
+                updateDisplay();
+            }
             break;
         case "divideButton":
-            displayString += `\u00F7`; // Divide unicode
-            operateButton(buttonId)
-            updateDisplay();
+            if(currentValue !== "")
+            {
+                displayString += `\u00F7`; // Divide unicode
+                operateButton(buttonId)
+                updateDisplay();
+            }
             break;
         case "multiplyButton":
-            displayString += `\u00D7`; // Multiply unicode
-            operateButton(buttonId)
-            updateDisplay();
+            if(currentValue !== "")
+            {
+                displayString += `\u00D7`; // Multiply unicode
+                operateButton(buttonId)
+                updateDisplay();
+            }
             break;
         case "subtractButton":
-            displayString += `\u2212`;
-            operateButton(buttonId)
-            updateDisplay();
+            if(currentValue !== "")
+            {
+                displayString += `\u2212`;
+                operateButton(buttonId)
+                updateDisplay();
+            }
             break;
         case "addButton":
-            displayString += `\u002B`;
-            operateButton(buttonId)
-            updateDisplay();
+            if(currentValue !== "")
+            {
+                displayString += `\u002B`;
+                operateButton(buttonId)
+                updateDisplay();
+            }
             break;
         case "clearButton":
             clearInputDisplay();
@@ -170,7 +185,9 @@ function buttonClick(buttonId)
                 updateDisplay();
             }else
             {
-                displayOutput("Can't delete operators");
+                (operator !== "") ?
+                    displayOutput("Can't delete operator") :
+                    displayOutput("Can't delete nothing");
             }
             break;
         case "equalButton":
