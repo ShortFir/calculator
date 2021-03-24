@@ -28,10 +28,12 @@ body
 {
     /* word-break: break-all; */
     text-align: right;
+    text-decoration: none;
     background-color: hsl(200, 100%, 50%);
     border-bottom-style: solid;
     border-bottom-width: 1px;
     padding: 10px;
+    border: inset;
 }
 #outputDisplay
 {
