@@ -34,7 +34,7 @@ const keyPressObj =
     };
 
 let displayString = "", currentValue = "", operator = "";
-let runningTotal = 0;
+let runningTotal = NaN;
 
 function add(a, b)
 {
@@ -75,12 +75,12 @@ function clearInputDisplay()
     displayString = "";
     currentValue = "";
     operator = "";
-    runningTotal = 0;
+    runningTotal = NaN;
     updateDisplay();
 }
 function operateButton(buttonId)
 {
-    (runningTotal === 0) ?
+    (isNaN(runningTotal)) ?
         runningTotal = parseFloat(currentValue) :
         runningTotal = operate(runningTotal, parseFloat(currentValue), operator);
     operator = buttonId; // placed after operate to avoid logic errors
@@ -93,10 +93,15 @@ function displayOutput(displayArg)
 }
 function checkOpInput()
 {
-    return (parseFloat(currentValue) !== 0 &&
-        currentValue !== "." &&
-            currentValue !== "") ?
-    true : false;
+    if(parseFloat(currentValue) === 0 && operator === "divideButton")
+    {
+        displayOutput("Can't Divide By Zero!");
+        return false;   
+    }
+    else if(currentValue !== "." && currentValue !== "")
+    {
+        return true;
+    }
 }
 function buttonClick(buttonId)
 {
@@ -107,15 +112,6 @@ function buttonClick(buttonId)
             currentValue += "0";
             displayString += "0";
             updateDisplay();
-            // if(currentValue !== "")
-            // {
-            //     currentValue += "0";
-            //     displayString += "0";
-            //     updateDisplay();
-            // }else
-            // {
-            //     displayOutput("Error! No leading zeros");
-            // }
             break;
         case "oneButton":
             currentValue += "1";
@@ -219,17 +215,7 @@ function buttonClick(buttonId)
             }
             break;
         case "equalButton":
-            if(runningTotal === 0)
-            {
-                displayOutput("Nothing to calculate");
-                break;
-            }
-            else if(parseFloat(currentValue) === 0)
-            {
-                displayOutput("Can't divide by Zero!");
-                break;
-            }
-            else if(runningTotal !== 0 && checkOpInput())
+            if(!isNaN(runningTotal) && checkOpInput())
             {
                 operateButton(buttonId);
                 displayOutput(displayString + " = " +
@@ -243,7 +229,7 @@ function buttonClick(buttonId)
 }
 function keyPress(event)
 {
-    if(event.keyCode !== 123) // F12 for inspector
+    if(event.keyCode !== 123) // F12 for element inspector
     {
         event.preventDefault();
         buttonClick(keyPressObj[event.keyCode]);
