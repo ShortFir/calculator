@@ -71,18 +71,22 @@ function displayOutput(displayArg)
 }
 function buttonClick(buttonId)
 {
+    console.log(`${buttonId}:Before:R:${runningTotal}:C:${currentValue}`);
     switch(buttonId)
     {
         case "zeroButton":
-            if(currentValue !== "")
-            {
-                currentValue += "0";
-                displayString += "0";
-                updateDisplay();
-            }else
-            {
-                displayOutput("Error! No leading zeros");
-            }
+            currentValue += "0";
+            displayString += "0";
+            updateDisplay();
+            // if(currentValue !== "")
+            // {
+            //     currentValue += "0";
+            //     displayString += "0";
+            //     updateDisplay();
+            // }else
+            // {
+            //     displayOutput("Error! No leading zeros");
+            // }
             break;
         case "oneButton":
             currentValue += "1";
@@ -138,7 +142,7 @@ function buttonClick(buttonId)
             }
             break;
         case "divideButton":
-            if(currentValue !== "")
+            if(parseFloat(currentValue) !== 0 && currentValue !== ".")
             {
                 displayString += `\u00F7`; // Divide unicode
                 operateButton(buttonId)
@@ -146,7 +150,7 @@ function buttonClick(buttonId)
             }
             break;
         case "multiplyButton":
-            if(currentValue !== "")
+            if(parseFloat(currentValue) !== 0 && currentValue !== ".")
             {
                 displayString += `\u00D7`; // Multiply unicode
                 operateButton(buttonId)
@@ -154,17 +158,17 @@ function buttonClick(buttonId)
             }
             break;
         case "subtractButton":
-            if(currentValue !== "")
+            if(parseFloat(currentValue) !== 0 && currentValue !== ".")
             {
-                displayString += `\u2212`;
+                displayString += `\u2212`; // Substract unicode
                 operateButton(buttonId)
                 updateDisplay();
             }
             break;
         case "addButton":
-            if(currentValue !== "")
+            if(parseFloat(currentValue) !== 0 && currentValue !== ".")
             {
-                displayString += `\u002B`;
+                displayString += `\u002B`; // Plus unicode
                 operateButton(buttonId)
                 updateDisplay();
             }
@@ -173,11 +177,6 @@ function buttonClick(buttonId)
             clearInputDisplay();
             break;
         case "deleteButton":
-            // if(operator !== "")
-            // {
-            //     operator = "";
-            //     displayString = displayString.split("").slice(0, -1).join("");
-            // }
             if(currentValue !== "")
             {
                 currentValue = currentValue.split("").slice(0, -1).join("");
@@ -191,7 +190,20 @@ function buttonClick(buttonId)
             }
             break;
         case "equalButton":
-            if(runningTotal !== 0 && currentValue !== "")
+            if(runningTotal === 0)
+            {
+                displayOutput("Nothing to calculate");
+                break;
+            }
+            else if(parseFloat(currentValue) === 0)
+            {
+                displayOutput("Can't divide by Zero!");
+                break;
+            }
+            else if(runningTotal !== 0 &&
+                parseFloat(currentValue) !== 0 &&
+                    currentValue !== "." &&
+                        currentValue !== "")
             {
                 operateButton(buttonId);
                 displayOutput(displayString + " = " +
@@ -201,6 +213,7 @@ function buttonClick(buttonId)
             }
             break;    
     }
+    console.log(`${buttonId}::After:R:${runningTotal}:C:${currentValue}`);
 }
 function main()
 {
@@ -212,6 +225,6 @@ function main()
                     buttonClick(button.id);
                 });
             });
-    console.log("main() ran ok");
+    console.log("main() ran");
 }
 main();
