@@ -2,20 +2,14 @@ body
 {
     height: 98vh;
     display: flex;
-    /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr; */
     justify-content: center;
     align-items: center;
-    background-color: #f5f5dc;
+    background-color: hsl(60, 56%, 95%);
 }
 #calculatorBox
 {
     height: 500px;
     width: 400px;
-    /* grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 2;
-    grid-row-end: 3; */
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 2fr 1fr 3fr;

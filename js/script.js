@@ -2,14 +2,36 @@
 // Future stuff maybe...
 //
 // Instead of case for buttonId, use an object(buttonId, value)...
-// Numbers have a function, operators another, functions a third.
-// Different addEvents for each I think.
+// Have object for buttons now. Need key to be button name.
+// Then add value of "0", "1", etc in Object[Array[i]]. Get key from value?
 //
 // Array for the runningTotal and display string etc, combine them ?,
 // then process the array on equals?
 
 const inputDisplay = document.getElementById("inputDisplay");
 const outputDisplay = document.getElementById("outputDisplay");
+const keyPressObj =
+    {
+        96:"zeroButton",
+        97:"oneButton",
+        98:"twoButton",
+        99:"threeButton",
+        100:"fourButton",
+        101:"fiveButton",
+        102:"sixButton",
+        103:"sevenButton",
+        104:"eightButton",
+        105:"nineButton",
+        110:"decimelButton",
+        111:"divideButton",
+        106:"multiplyButton",
+        109:"subtractButton",
+        107:"addButton",
+        8:"deleteButton",
+        46:"deleteButton",
+        27:"clearButton",
+        13:"equalButton",
+    };
 
 let displayString = "", currentValue = "", operator = "";
 let runningTotal = 0;
@@ -68,6 +90,13 @@ function displayOutput(displayArg)
 {
     outputDisplay.textContent += displayArg + `\n`;
     outputDisplay.scrollTop = outputDisplay.scrollHeight;
+}
+function checkOpInput()
+{
+    return (parseFloat(currentValue) !== 0 &&
+        currentValue !== "." &&
+            currentValue !== "") ?
+    true : false;
 }
 function buttonClick(buttonId)
 {
@@ -142,7 +171,7 @@ function buttonClick(buttonId)
             }
             break;
         case "divideButton":
-            if(parseFloat(currentValue) !== 0 && currentValue !== ".")
+            if(checkOpInput())
             {
                 displayString += `\u00F7`; // Divide unicode
                 operateButton(buttonId)
@@ -150,7 +179,7 @@ function buttonClick(buttonId)
             }
             break;
         case "multiplyButton":
-            if(parseFloat(currentValue) !== 0 && currentValue !== ".")
+            if(checkOpInput())
             {
                 displayString += `\u00D7`; // Multiply unicode
                 operateButton(buttonId)
@@ -158,7 +187,7 @@ function buttonClick(buttonId)
             }
             break;
         case "subtractButton":
-            if(parseFloat(currentValue) !== 0 && currentValue !== ".")
+            if(checkOpInput())
             {
                 displayString += `\u2212`; // Substract unicode
                 operateButton(buttonId)
@@ -166,7 +195,7 @@ function buttonClick(buttonId)
             }
             break;
         case "addButton":
-            if(parseFloat(currentValue) !== 0 && currentValue !== ".")
+            if(checkOpInput())
             {
                 displayString += `\u002B`; // Plus unicode
                 operateButton(buttonId)
@@ -200,10 +229,7 @@ function buttonClick(buttonId)
                 displayOutput("Can't divide by Zero!");
                 break;
             }
-            else if(runningTotal !== 0 &&
-                parseFloat(currentValue) !== 0 &&
-                    currentValue !== "." &&
-                        currentValue !== "")
+            else if(runningTotal !== 0 && checkOpInput())
             {
                 operateButton(buttonId);
                 displayOutput(displayString + " = " +
@@ -214,6 +240,14 @@ function buttonClick(buttonId)
             break;    
     }
     console.log(`${buttonId}::After:R:${runningTotal}:C:${currentValue}`);
+}
+function keyPress(event)
+{
+    if(event.keyCode !== 123) // F12 for inspector
+    {
+        event.preventDefault();
+        buttonClick(keyPressObj[event.keyCode]);
+    }
 }
 function main()
 {
